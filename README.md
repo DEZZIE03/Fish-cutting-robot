@@ -1,5 +1,4 @@
 # Fish-cutting-robot
-# Fish-cutting-robot-
 # ============================================
 # FULL COMMAND WORKFLOW (ROS2 + MoveIt + Code)
 # ============================================
