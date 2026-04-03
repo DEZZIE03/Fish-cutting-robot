@@ -9,9 +9,9 @@ from geometry_msgs.msg import Pose, PoseStamped
 
 
 # Ask the lab or check launch files
-PLANNING_GROUP = "PUT_FAIRINO_PLANNING_GROUP_HERE"
-BASE_FRAME = "PUT_FAIRINO_BASE_FRAME_HERE"
-EE_LINK = "PUT_FAIRINO_END_EFFECTOR_LINK_HERE"
+PLANNING_GROUP = "fairino10_v6_group"
+BASE_FRAME = "base_link"
+EE_LINK = "wrist3_link"
 
 
 class MoveAboveTable(Node):
