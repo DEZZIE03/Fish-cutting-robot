@@ -42,9 +42,9 @@ class MoveAboveTable(Node):
         # Record X, Y, Z (mm convert to meters)
         # Convert mm → meters (divide by 1000)
 
-        x = 0.0   # TODO: replace
-        y = 0.0   # TODO: replace
-        z = 0.0   # TODO: replace
+        x = -0.312097 
+        y = 0.762458   
+        z = 0.35   
 
         target_pose = Pose()
         target_pose.position.x = x
