@@ -3,7 +3,6 @@ from __future__ import annotations
 import argparse
 import json
 import sys
-import threading
 import time
 from dataclasses import asdict, dataclass
 from pathlib import Path
@@ -125,7 +124,13 @@ def detect_marker(bgr: np.ndarray, K: np.ndarray, dist: np.ndarray, marker_size_
         [-half, -half, 0.0],
     ], dtype=np.float32)
 
-    ok, rvec, tvec = cv2.solvePnP(obj_pts, corner.reshape(4, 2), K, dist, flags=cv2.SOLVEPNP_IPPE_SQUARE)
+    ok, rvec, tvec = cv2.solvePnP(
+        obj_pts,
+        corner.reshape(4, 2),
+        K,
+        dist,
+        flags=cv2.SOLVEPNP_IPPE_SQUARE,
+    )
     if not ok:
         return None, None, None, vis
 
@@ -141,8 +146,6 @@ def connect_robot(ip: str):
     robot = Robot.RPC(ip)
     if not robot.is_connect:
         raise RuntimeError(f"Cannot connect to robot at {ip}")
-    t = threading.Thread(target=robot.robot_state_routine_thread, daemon=True)
-    t.start()
     time.sleep(0.5)
     return robot
 
