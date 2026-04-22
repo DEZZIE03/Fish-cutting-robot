@@ -139,7 +139,7 @@ def detect_marker(bgr: np.ndarray, K: np.ndarray, dist: np.ndarray, marker_size_
 
 def connect_robot(ip: str):
     robot = Robot.RPC(ip)
-    if not robot.is_conect:
+    if not robot.is_connect:
         raise RuntimeError(f"Cannot connect to robot at {ip}")
     t = threading.Thread(target=robot.robot_state_routine_thread, daemon=True)
     t.start()
