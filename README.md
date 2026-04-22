@@ -32,6 +32,11 @@
 # After editing in VS Code:
 
 # cd ~/ros2_ws
+
+#run order 
+# python3 handeye_collect_fixed.py
+# python3 handeye_solve_fixed.py
+# python3 handeye_verify_fixed.py
 # colcon build
 # source ~/ros2_ws/install/setup.bash
 
