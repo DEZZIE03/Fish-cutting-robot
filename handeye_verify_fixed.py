@@ -3,7 +3,6 @@ from __future__ import annotations
 import json
 import os
 import sys
-import threading
 import time
 from typing import Any
 
@@ -113,8 +112,17 @@ def detect_marker(bgr, K, dist):
     idx = list(ids.ravel()).index(TARGET_MARKER_ID)
     corner = corners[idx]
     half = MARKER_SIZE_MM / 2.0
-    obj_pts = np.array([[-half, half, 0], [half, half, 0], [half, -half, 0], [-half, -half, 0]], dtype=np.float32)
-    ok, rvec, tvec = cv2.solvePnP(obj_pts, corner.reshape(4, 2), K, dist, flags=cv2.SOLVEPNP_IPPE_SQUARE)
+    obj_pts = np.array(
+        [[-half, half, 0], [half, half, 0], [half, -half, 0], [-half, -half, 0]],
+        dtype=np.float32,
+    )
+    ok, rvec, tvec = cv2.solvePnP(
+        obj_pts,
+        corner.reshape(4, 2),
+        K,
+        dist,
+        flags=cv2.SOLVEPNP_IPPE_SQUARE,
+    )
     if not ok:
         return None, None, None
     proj, _ = cv2.projectPoints(obj_pts, rvec, tvec, K, dist)
@@ -123,11 +131,7 @@ def detect_marker(bgr, K, dist):
 
 
 def connect_robot():
-    import socket
-    socket.setdefaulttimeout(5)
     robot = Robot.RPC(ROBOT_IP)
-    t = threading.Thread(target=robot.robot_state_routine_thread, daemon=True)
-    t.start()
     time.sleep(0.5)
     err, estop = robot.GetRobotEmergencyStopState()
     if err != 0 or estop:
