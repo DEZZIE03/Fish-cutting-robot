@@ -137,7 +137,7 @@ for i in range(1, len(waypoints)):
         vel=20,
         acc=0,
         ovl=100,
-        blendR=5.0,   # try 0, 2, 5, or 10 depending on behavior
+        blendR=5.0,   # try differnt numbers depending on behavior
         exaxis_pos=[0.0, 0.0, 0.0, 0.0],
         search=0,
         offset_flag=0,
